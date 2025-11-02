@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ UltraUpload - File Sharing Revolution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .file-drop-area {
+            border: 3px dashed #4F46E5;
+            transition: all 0.3s ease;
+        }
+        .file-drop-area.dragover {
+            background-color: #4F46E5;
+            border-color: #ffffff;
+            transform: scale(1.02);
+        }
+        .pulse-upload {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-effect rounded-full mx-4 mt-4 mb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-cloud-upload-alt text-white text-2xl"></i>
+                    <span class="text-white text-xl font-bold">UltraUpload</span>
+                </div>
+                <div class="text-white">
+                    <span class="text-sm opacity-80">Unlimited • Fast • Secure</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                Share Files in
+                <span class="text-yellow-300">Style</span>
+            </h1>
+            <p class="text-xl text-white opacity-90 mb-8">
+                Drag, drop, and share your files instantly. Support for images, videos, audio, and more!
+            </p>
+            
+            <!-- Upload Area -->
+            <div class="file-drop-area glass-effect rounded-2xl p-8 mb-8 pulse-upload">
+                <div class="text-center">
+                    <i class="fas fa-cloud-upload-alt text-white text-6xl mb-4"></i>
+                    <h3 class="text-2xl font-semibold text-white mb-2">Drop your files here</h3>
+                    <p class="text-white opacity-80 mb-6">or click to browse</p>
+                    <input type="file" id="fileInput" multiple class="hidden">
+                    <button onclick="document.getElementById('fileInput').click()" 
+                            class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-folder-open mr-2"></i>Choose Files
+                    </button>
+                </div>
+                <div id="fileList" class="mt-6 space-y-3"></div>
+            </div>
+
+            <!-- Expiry Options -->
+            <div class="glass-effect rounded-2xl p-6 mb-8">
+                <h3 class="text-white text-xl font-semibold mb-4">File Expiration</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <label class="expiry-option">
+                        <input type="radio" name="expiry" value="1h" class="hidden">
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-opacity-30">
+                            <div class="text-white font-semibold">1 Hour</div>
+                            <div class="text-white text-opacity-70 text-sm">Quick share</div>
+                        </div>
+                    </label>
+                    <label class="expiry-option">
+                        <input type="radio" name="expiry" value="1d" class="hidden" checked>
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-opacity-30">
+                            <div class="text-white font-semibold">1 Day</div>
+                            <div class="text-white text-opacity-70 text-sm">Daily files</div>
+                        </div>
+                    </label>
+                    <label class="expiry-option">
+                        <input type="radio" name="expiry" value="1m" class="hidden">
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-opacity-30">
+                            <div class="text-white font-semibold">1 Month</div>
+                            <div class="text-white text-opacity-70 text-sm">Long term</div>
+                        </div>
+                    </label>
+                    <label class="expiry-option">
+                        <input type="radio" name="expiry" value="never" class="hidden">
+                        <div class="bg-white bg-opacity-20 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-opacity-30">
+                            <div class="text-white font-semibold">No Expiry</div>
+                            <div class="text-white text-opacity-70 text-sm">Permanent</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Upload Button -->
+            <button id="uploadBtn" 
+                    class="bg-green-500 text-white px-12 py-4 rounded-full font-bold text-lg hover:bg-green-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                <i class="fas fa-rocket mr-2"></i>Launch Upload!
+            </button>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+            <div class="glass-effect rounded-xl p-6 text-center">
+                <i class="fas fa-bolt text-yellow-400 text-3xl mb-4"></i>
+                <h3 class="text-white font-semibold text-lg mb-2">Lightning Fast</h3>
+                <p class="text-white opacity-80">Upload and share in seconds</p>
+            </div>
+            <div class="glass-effect rounded-xl p-6 text-center">
+                <i class="fas fa-shield-alt text-green-400 text-3xl mb-4"></i>
+                <h3 class="text-white font-semibold text-lg mb-2">Secure & Private</h3>
+                <p class="text-white opacity-80">Auto-expiring files</p>
+            </div>
+            <div class="glass-effect rounded-xl p-6 text-center">
+                <i class="fas fa-robot text-purple-400 text-3xl mb-4"></i>
+                <h3 class="text-white font-semibold text-lg mb-2">API Ready</h3>
+                <p class="text-white opacity-80">Easy integration for bots</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="glass-effect rounded-2xl p-8 max-w-md w-full">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-green-400 text-5xl mb-4"></i>
+                <h3 class="text-white text-2xl font-bold mb-4">Upload Successful!</h3>
+                <div class="bg-white bg-opacity-10 rounded-xl p-4 mb-6">
+                    <div class="text-white font-mono text-sm break-all" id="fileUrl"></div>
+                </div>
+                <button onclick="copyUrl()" class="bg-white text-indigo-600 px-6 py-2 rounded-full font-semibold mr-2">
+                    <i class="fas fa-copy mr-2"></i>Copy URL
+                </button>
+                <button onclick="closeModal()" class="bg-gray-500 text-white px-6 py-2 rounded-full font-semibold">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
